@@ -1,0 +1,59 @@
+Pick a task you want a time estimate for. (Examples: Going to a friend's house, Finishing literature project, Buying plane tickets ....)<br>
+<input type="text" id="task-name"><br><br>
+How long do you think it will take? (Input a number)<br>
+<input type="text" id="time-estimate">
+<select id="time-unit">
+  <option value="sec">Seconds</option>
+  <option value="min">Minutes</option>
+  <option value="hour">Hours</option>
+  <option value="day">Days</option>
+  <option value="week">Weeks</option>
+</select>
+
+<br><br>
+When you usually estimate tasks like these, how many times longer does it actually take? (Example: If you usually finish in half the time, enter 0.5.)
+<br>
+<input type="text" id="multiplier"><br>
+
+
+<button type="button" onclick="onClick()">Accurate time estimate</button>
+
+
+<div id = "Output" style="display:none">
+Congratulations! <span id="displayed-task-name"> </span> will take <span id="true-time"> </span> 
+<div id="unit">
+</div>
+</div>
+
+
+<script>
+  //All javascript is currently shunted into "script". This is terrible practice.
+
+function onClick(){
+	fillTaskBlank();
+  fillTimeEstimate();
+	unhide();
+ // document.getElementById("true-time").innerText = trueTime() + " " + getUnit() ;
+}
+function fillTaskBlank() { 
+  document.getElementById("displayed-task-name").innerText = document.getElementById("task-name").value;
+}
+function fillTimeEstimate(){
+  var text = trueTime() + " " + getUnit();
+  document.getElementById("true-time").innerText = text;
+}
+function unhide() {
+  var x = document.getElementById("Output");
+    x.style.display = "block";
+}
+function getUnit(){
+    var e = document.getElementById("time-unit");
+    return e.options[e.selectedIndex].text;
+}
+function trueTime(){
+	var t = document.getElementById("time-estimate").value;
+  var m = document.getElementById("multiplier").value;
+  return parseInt(t)*parseInt(m);
+}
+
+</script>
